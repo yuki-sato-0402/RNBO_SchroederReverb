@@ -7,10 +7,8 @@
 
 class CustomAudioProcessor :public juce::AudioProcessor ,public juce::AudioProcessorValueTreeState::Listener{
 public:
-    //static CustomAudioProcessor* CreateDefault();
     CustomAudioProcessor();
     ~CustomAudioProcessor() override = default;
-    // 必須の純粋仮想関数
     juce::AudioProcessorEditor* createEditor() override;
     bool hasEditor() const override;
    

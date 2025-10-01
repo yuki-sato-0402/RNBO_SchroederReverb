@@ -2,15 +2,9 @@
 #include "CustomAudioEditor.h"
 
 CustomAudioEditor::CustomAudioEditor (CustomAudioProcessor& p, juce::AudioProcessorValueTreeState& vts)
-    : AudioProcessorEditor (&p), valueTreeState(vts)// 参照メンバーを初期化（必須）
+    : AudioProcessorEditor (&p), valueTreeState(vts)
 {
-    //Mix
     addAndMakeVisible(dial1Slider);
-    // デバッグ: vts の state を確認
-    DBG("vts.state: " + valueTreeState.state.toXmlString());
-
-    std::cout << "mix1" << std::endl;
-    //スライダーひAPVTSのパラメータを紐づけます。
     dial1Attachment.reset (new SliderAttachment (valueTreeState, "mix", dial1Slider));
     dial1Slider.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
     dial1Slider.setTextValueSuffix (" %");     
@@ -25,9 +19,7 @@ CustomAudioEditor::CustomAudioEditor (CustomAudioProcessor& p, juce::AudioProces
     label1.setText ("Mix", juce::dontSendNotification);
     label1.setJustificationType(juce::Justification::centred);
     
-    //All-pass Filter
     addAndMakeVisible(dial2Slider);
-    std::cout << "delayAll" << std::endl;
     dial2Attachment.reset (new SliderAttachment (valueTreeState, "delayAll", dial2Slider));
     dial2Slider.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
     dial2Slider.setTextValueSuffix (" ms");     
@@ -42,9 +34,7 @@ CustomAudioEditor::CustomAudioEditor (CustomAudioProcessor& p, juce::AudioProces
     label2.setText ("Del All-Pass Filter ", juce::dontSendNotification);
     label2.setJustificationType(juce::Justification::centred);
     
-    //Comb Filter
     addAndMakeVisible(dial3Slider);
-    std::cout << "delayCom" << std::endl;
     dial3Attachment.reset (new SliderAttachment (valueTreeState, "delayCom", dial3Slider));
     dial3Slider.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
     dial3Slider.setTextValueSuffix (" ms");     
@@ -64,17 +54,14 @@ CustomAudioEditor::CustomAudioEditor (CustomAudioProcessor& p, juce::AudioProces
 
 void CustomAudioEditor::paint (Graphics& g)
 {
-    g.fillAll(juce::Colours::deepskyblue); // 背景色を設定
+    g.fillAll(juce::Colours::deepskyblue); 
 }
 
 void CustomAudioEditor::resized()
 {
-    //四隅からマージンを設けてサイズを縮小するために使用する値
     auto border = 6;
 
-　　//エディター全体の領域を取得
     auto area = getLocalBounds();
-
     dial1Slider.setBounds(area.removeFromLeft(area.getWidth() / 3).reduced(border));
     dial2Slider.setBounds(area.removeFromLeft(area.getWidth() / 2).reduced(border));
     dial3Slider.setBounds(area.reduced(border));
@@ -82,5 +69,4 @@ void CustomAudioEditor::resized()
     label1.setBounds(dial1Slider.getX(), dial1Slider.getY(), dial1Slider.getWidth(),dial1Slider.getTextBoxHeight() );
     label2.setBounds(dial2Slider.getX(), dial2Slider.getY(), dial2Slider.getWidth(),dial2Slider.getTextBoxHeight() );
     label3.setBounds(dial3Slider.getX(), dial3Slider.getY(), dial3Slider.getWidth(),dial3Slider.getTextBoxHeight() );
-
 }

@@ -10,7 +10,6 @@ CustomAudioProcessor::CustomAudioProcessor()
                   .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
                   #endif
                   ),
-//コンストラクタの イニシャライザリスト で初期化
 parameters(*this, nullptr, juce::Identifier("PARAMETERS"),
     juce::AudioProcessorValueTreeState::ParameterLayout {
       std::make_unique<juce::AudioParameterFloat>(ParameterID { "mix",  1}, "mix",
@@ -22,7 +21,6 @@ parameters(*this, nullptr, juce::Identifier("PARAMETERS"),
     }
   )
 {
- 
  
   for (RNBO::ParameterIndex i = 0; i < rnboObject.getNumParameters(); ++i){
     RNBO::ParameterInfo info;
@@ -45,7 +43,6 @@ parameters(*this, nullptr, juce::Identifier("PARAMETERS"),
 
       apvtsParamIdToRnboParamIndex[paramID] = i;
     
-
       parameters.addParameterListener(paramID, this);
       rnboObject.setParameterValue(i, parameters.getRawParameterValue(paramID)->load());  // RNBO に適用
       
@@ -75,7 +72,6 @@ void CustomAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::
      );     
 }
 
-////このコールバック メソッドは、パラメータが変更されたときに AudioProcessorValueTreeStateによって呼び出されます。
 void CustomAudioProcessor::parameterChanged(const juce::String& parameterID, float newValue)
 {
  rnboObject.setParameterValue (apvtsParamIdToRnboParamIndex[parameterID], newValue);
@@ -83,10 +79,7 @@ void CustomAudioProcessor::parameterChanged(const juce::String& parameterID, flo
 
 juce::AudioProcessorEditor* CustomAudioProcessor::createEditor()
 {
-    //AudioProcessorEditor側でAudioProcessorValueTreeStateにアクセスするための方法が必要。
    return new CustomAudioEditor (*this,  parameters);
-    //RNBOのデフォルトエディター, 標準的なパラメータ表示, 追加のカスタマイズが限定的
-  // return RNBO::JuceAudioProcessor::createEditor();
 }
 
 bool CustomAudioProcessor::hasEditor() const
