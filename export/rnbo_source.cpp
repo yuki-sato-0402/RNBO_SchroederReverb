@@ -222,6 +222,10 @@ number scale(
     return value;
 }
 
+number __wrapped_op_clamp(number in1, number in2, number in3) {
+    return (in1 > in3 ? in3 : (in1 < in2 ? in2 : in1));
+}
+
 MillisecondTime currenttime() {
     return this->_currentTime;
 }
@@ -1153,70 +1157,70 @@ void gen_01_perform(
     Index n
 ) {
     number div_10_0 = mix / (number)100;
-    auto scale_11_1 = this->scale(mix, 0, 100, 1, 2.25, 0.5);
+    auto scale_11_1 = this->scale(mix, 0, 100, 1, 0.175, 0.1);
     Index i;
 
     for (i = 0; i < n; i++) {
-        number div_12_2 = (scale_11_1 == 0. ? 0. : in1[(Index)i] / scale_11_1);
-        number mul_13_3 = div_12_2 * 0.9;
-        number div_14_4 = (scale_11_1 == 0. ? 0. : in2[(Index)i] / scale_11_1);
-        number mul_15_5 = div_14_4 * 0.9;
-        number mul1_6 = this->gen_01_del2_read(this->mstosamps(delayCom) / (number)1.321, 0) * 0.9;
-        number mul2_7 = this->gen_01_del3_read(this->mstosamps(delayCom) / (number)1.321, 0) * 0.9;
+        number mul_12_2 = in1[(Index)i] * scale_11_1;
+        number mul_13_3 = mul_12_2 * 0.9;
+        number mul_14_4 = in2[(Index)i] * scale_11_1;
+        number mul_15_5 = mul_14_4 * 0.9;
+        number mul1_6 = this->gen_01_del2_read(this->mstosamps(delayCom) / (number)1.321, 0) * 0.75;
+        number mul2_7 = this->gen_01_del3_read(this->mstosamps(delayCom) / (number)1.321, 0) * 0.75;
         number add2_8 = mul_13_3 + mul1_6;
         number add3_9 = mul_15_5 + mul2_7;
-        number expr_16_10 = (add2_8 > 1 ? 1 : (add2_8 < -1 ? -1 : add2_8));
-        number expr_17_11 = (add3_9 > 1 ? 1 : (add3_9 < -1 ? -1 : add3_9));
+        number expr_16_10 = this->__wrapped_op_clamp(rnbo_atan(add2_8), -1, 1);
+        number expr_17_11 = this->__wrapped_op_clamp(rnbo_atan(add3_9), -1, 1);
         this->gen_01_del2_write(add2_8 + mul_13_3);
         this->gen_01_del3_write(add3_9 + mul_15_5);
-        number mul_18_12 = this->gen_01_del_1_read(this->mstosamps(delayCom) / (number)1.103, 0) * 0.88;
-        number mul_19_13 = this->gen_01_del_2_read(this->mstosamps(delayCom) / (number)1.103, 0) * 0.88;
+        number mul_18_12 = this->gen_01_del_1_read(this->mstosamps(delayCom) / (number)1.103, 0) * 0.73;
+        number mul_19_13 = this->gen_01_del_2_read(this->mstosamps(delayCom) / (number)1.103, 0) * 0.73;
         number add_20_14 = mul_13_3 + mul_18_12;
         number add_21_15 = mul_15_5 + mul_19_13;
-        number expr_22_16 = (add_20_14 > 1 ? 1 : (add_20_14 < -1 ? -1 : add_20_14));
-        number expr_23_17 = (add_21_15 > 1 ? 1 : (add_21_15 < -1 ? -1 : add_21_15));
+        number expr_22_16 = this->__wrapped_op_clamp(rnbo_atan(add_20_14), -1, 1);
+        number expr_23_17 = this->__wrapped_op_clamp(rnbo_atan(add_21_15), -1, 1);
         this->gen_01_del_1_write(add_20_14 + mul_13_3);
         this->gen_01_del_2_write(add_21_15 + mul_15_5);
-        number mul_24_18 = this->gen_01_del_3_read(this->mstosamps(delayCom) / (number)1.197, 0) * 0.89;
-        number mul_25_19 = this->gen_01_del_4_read(this->mstosamps(delayCom) / (number)1.197, 0) * 0.89;
+        number mul_24_18 = this->gen_01_del_3_read(this->mstosamps(delayCom), 0) * 0.72;
+        number mul_25_19 = this->gen_01_del_4_read(this->mstosamps(delayCom), 0) * 0.72;
         number add_26_20 = mul_13_3 + mul_24_18;
         number add_27_21 = mul_15_5 + mul_25_19;
-        number expr_28_22 = (add_26_20 > 1 ? 1 : (add_26_20 < -1 ? -1 : add_26_20));
-        number expr_29_23 = (add_27_21 > 1 ? 1 : (add_27_21 < -1 ? -1 : add_27_21));
+        number expr_28_22 = this->__wrapped_op_clamp(rnbo_atan(add_26_20), -1, 1);
+        number expr_29_23 = this->__wrapped_op_clamp(rnbo_atan(add_27_21), -1, 1);
         this->gen_01_del_3_write(add_26_20 + mul_13_3);
         this->gen_01_del_4_write(add_27_21 + mul_15_5);
-        number mul_30_24 = this->gen_01_del_5_read(this->mstosamps(delayCom), 0) * 0.87;
-        number mul_31_25 = this->gen_01_del_6_read(this->mstosamps(delayCom), 0) * 0.87;
+        number mul_30_24 = this->gen_01_del_5_read(this->mstosamps(delayCom) / (number)1.197, 0) * 0.74;
+        number mul_31_25 = this->gen_01_del_6_read(this->mstosamps(delayCom) / (number)1.197, 0) * 0.74;
         number add_32_26 = mul_13_3 + mul_30_24;
         number add_33_27 = mul_15_5 + mul_31_25;
-        number expr_34_28 = (add_32_26 > 1 ? 1 : (add_32_26 < -1 ? -1 : add_32_26));
-        number expr_35_29 = (add_33_27 > 1 ? 1 : (add_33_27 < -1 ? -1 : add_33_27));
+        number expr_34_28 = this->__wrapped_op_clamp(rnbo_atan(add_32_26), -1, 1);
+        number expr_35_29 = this->__wrapped_op_clamp(rnbo_atan(add_33_27), -1, 1);
         this->gen_01_del_5_write(add_32_26 + mul_13_3);
         this->gen_01_del_6_write(add_33_27 + mul_15_5);
         number add_36_30 = expr_34_28 + expr_28_22 + (expr_22_16 + expr_16_10);
-        number add_37_31 = expr_35_29 + expr_23_17 + expr_29_23 + expr_17_11 + 0;
+        number add_37_31 = expr_23_17 + expr_17_11 + expr_35_29 + expr_29_23 + 0;
         number tap1_32 = this->gen_01_del_7_read(this->mstosamps(delayAll), 0);
         number tap2_33 = this->gen_01_del_7_read(this->mstosamps(delayAll), 0);
         number add1_34 = add_36_30 + tap1_32 * 0.7 * -1;
         number add_38_35 = add_37_31 + tap2_33 * 0.7 * -1;
-        number expr_39_36 = (add1_34 * 0.7 + tap1_32 > 1 ? 1 : (add1_34 * 0.7 + tap1_32 < -1 ? -1 : add1_34 * 0.7 + tap1_32));
-        number expr_40_37 = (add_38_35 * 0.7 + tap1_32 > 1 ? 1 : (add_38_35 * 0.7 + tap1_32 < -1 ? -1 : add_38_35 * 0.7 + tap1_32));
+        number expr_39_36 = (rnbo_atan(add_38_35) * 0.6 + tap1_32 > 1 ? 1 : (rnbo_atan(add_38_35) * 0.6 + tap1_32 < -1 ? -1 : rnbo_atan(add_38_35) * 0.6 + tap1_32));
+        number expr_40_37 = (rnbo_atan(add3_9) * 0.6 + tap1_32 > 1 ? 1 : (rnbo_atan(add3_9) * 0.6 + tap1_32 < -1 ? -1 : rnbo_atan(add3_9) * 0.6 + tap1_32));
         this->gen_01_del1_write(add1_34);
         this->gen_01_del_7_write(add_38_35);
         number tap_41_38 = this->gen_01_del_8_read(this->mstosamps(delayAll) / (number)2.941, 0);
         number tap_42_39 = this->gen_01_del_9_read(this->mstosamps(delayAll) / (number)2.941, 0);
         number add_43_40 = expr_39_36 + tap_41_38 * 0.7 * -1;
         number add_44_41 = expr_40_37 + tap_42_39 * 0.7 * -1;
-        number expr_45_42 = (add_43_40 * 0.7 + tap_41_38 > 1 ? 1 : (add_43_40 * 0.7 + tap_41_38 < -1 ? -1 : add_43_40 * 0.7 + tap_41_38));
-        number expr_46_43 = (add_44_41 * 0.7 + tap_41_38 > 1 ? 1 : (add_44_41 * 0.7 + tap_41_38 < -1 ? -1 : add_44_41 * 0.7 + tap_41_38));
+        number expr_45_42 = (rnbo_atan(add_44_41) * 0.6 + tap_41_38 > 1 ? 1 : (rnbo_atan(add_44_41) * 0.6 + tap_41_38 < -1 ? -1 : rnbo_atan(add_44_41) * 0.6 + tap_41_38));
+        number expr_46_43 = (rnbo_atan(add3_9) * 0.6 + tap_41_38 > 1 ? 1 : (rnbo_atan(add3_9) * 0.6 + tap_41_38 < -1 ? -1 : rnbo_atan(add3_9) * 0.6 + tap_41_38));
         this->gen_01_del_8_write(add_43_40);
         this->gen_01_del_9_write(add_44_41);
-        number add_47_44 = expr_45_42 + mul_13_3;
-        number mix_48_45 = in1[(Index)i] + div_10_0 * (add_47_44 - in1[(Index)i]);
-        out1[(Index)i] = mix_48_45;
-        number add_49_46 = expr_46_43 + mul_15_5;
-        number mix_50_47 = in2[(Index)i] + div_10_0 * (add_49_46 - in2[(Index)i]);
-        out2[(Index)i] = mix_50_47;
+        number add_47_44 = expr_46_43 + 0;
+        number mix_48_45 = in2[(Index)i] + div_10_0 * (add_47_44 - in2[(Index)i]);
+        out2[(Index)i] = mix_48_45;
+        number add_49_46 = expr_45_42 + 0;
+        number mix_50_47 = in1[(Index)i] + div_10_0 * (add_49_46 - in1[(Index)i]);
+        out1[(Index)i] = mix_50_47;
         this->gen_01_del_9_step();
         this->gen_01_del_8_step();
         this->gen_01_del_7_step();
