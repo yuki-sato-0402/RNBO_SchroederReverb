@@ -30,7 +30,7 @@ juce_add_plugin(RNBOAudioPlugin
   PLUGIN_MANUFACTURER_CODE "Exm0"      # A four-character manufacturer id with at least one upper-case character
   PLUGIN_CODE "Rnb0"                   # A unique four-character plugin id with at least one upper-case character
   FORMATS ${PLUGIN_FORMATS}            # The formats to build. Other valid formats are: AAX Unity VST AU AUv3
-  PRODUCT_NAME "RNBO_Reverb1")          # The name of the final executable, which can differ from the target name
+  PRODUCT_NAME "RNBO_SchroederReverb")          # The name of the final executable, which can differ from the target name
 
 # `juce_generate_juce_header` will create a JuceHeader.h for a given target, which will be generated
 # into your build tree. This should be included with `#include <JuceHeader.h>`. The include path for
