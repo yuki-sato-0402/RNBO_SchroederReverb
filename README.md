@@ -1,10 +1,16 @@
 # RNBO_SchroederReverb
 
-This is a Schroeder Reverb by RNBO (Max Msp).  
-I have also arranged the code to use the [AudioProcessorValueTreeState](https://docs.juce.com/master/classAudioProcessorValueTreeState.html).
-Built from the [rnbo.example.juce](https://github.com/Cycling74/rnbo.example.juce).  
+**A classic Schroeder Reverb plugin (VST3 / AU / Standalone)**
 
-For *Getting Started*, please refer to the original repository. Also included in this repository is the C++ program output from RNBO in `export/`. And Max patch is included in `patches/`.
+This project recreates the legendary Schroeder Reverb algorithm, providing a lush and historical reverberation character. It uses a combination of parallel comb filters and series all-pass filters to simulate dense sound reflections.
+
+## Key Features
+- **Multi-Format Support**: Build as a **VST3 plugin, AU (Audio Unit) plugin, and Standalone application**.
+- **Authentic Schroeder Architecture**: Utilizes four parallel comb filters followed by two series all-pass filters for classic diffusion.
+- **JUCE Integration**: Uses `AudioProcessorValueTreeState` for robust parameter management and full DAW automation.
+
+Built from the [rnbo.example.juce](https://github.com/Cycling74/rnbo.example.juce) template.  
+The C++ source exported from RNBO is in export/, and the original Max patch is in patches/.
 
 ## Demonstration
 [Youtube<img width="845" alt="reverb" src="https://github.com/user-attachments/assets/86647976-46d6-43e5-8b9b-91dd0a3a5f7f" />](https://youtu.be/FGrxxtUx-4M)
