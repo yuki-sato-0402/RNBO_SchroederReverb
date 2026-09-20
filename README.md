@@ -13,7 +13,7 @@ Built from the [rnbo.example.juce](https://github.com/Cycling74/rnbo.example.juc
 The C++ source exported from RNBO is in export/, and the original Max patch is in patches/.
 
 ## Demonstration
-[Youtube<img width="845" alt="reverb" src="https://github.com/user-attachments/assets/86647976-46d6-43e5-8b9b-91dd0a3a5f7f" />](https://youtu.be/FGrxxtUx-4M)
+[Youtube<img width="512" height="320" alt="Screenshot 2026-09-21 at 1 25 55" src="https://github.com/user-attachments/assets/6f1dd2cc-c865-4232-b9e6-616ebaf1326f" />](https://youtu.be/FGrxxtUx-4M)
 
 ## Parameter explanation
 - **Mix** : You can control the ratio of dry sound to wet sound.
